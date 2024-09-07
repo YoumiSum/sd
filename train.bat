@@ -1,0 +1,29 @@
+set MODEL_NAME=C:\Users\Youmi\Desktop\youmi\diffusion\models\stable-diffusion-xl-base-1.0
+set OUTPUT_DIR=C:\Users\Youmi\Desktop\youmi\diffusion\genshin_keli\result
+set DATASET_NAME=C:\Users\Youmi\Desktop\youmi\diffusion\genshin_keli\train_img
+ 
+accelerate launch train_text_to_image_lora_sdxl.py ^
+  --pretrained_model_name_or_path=%MODEL_NAME% ^
+  --dataset_name=%DATASET_NAME% ^
+  --dataloader_num_workers=0 ^
+  --random_flip ^
+  --center_crop ^
+  --train_batch_size=1 ^
+  --gradient_accumulation_steps=1 ^
+  --max_train_steps=2000 ^
+  --learning_rate=1e-04 ^
+  --max_grad_norm=1 ^
+  --lr_scheduler="constant_with_warmup" ^
+  --lr_warmup_steps=100 ^
+  --output_dir=%OUTPUT_DIR% ^
+  --checkpointing_steps=100 ^
+  --seed=313 ^
+  --rank=64 ^
+  --snr_gamma=5.0 ^
+  --checkpoints_total_limit=3 ^
+  --noise_offset=0.1 ^
+  --center_crop ^
+  --train_text_encoder ^
+  --height=512 ^
+  --width=512 ^
+  --mixed_precision="no" ^
